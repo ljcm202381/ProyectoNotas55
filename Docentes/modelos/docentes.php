@@ -1,6 +1,6 @@
 <?php
 include_once('../../Conexion.php');
-class Administrador extends Conexion
+class Docentes extends Conexion
 {
 
 
@@ -11,29 +11,32 @@ class Administrador extends Conexion
  }
 
 //funcion para registrar los usuarios
-public function addadmi($Nombreusu,$Apellidousu,$Usuariousu,$Passwordusu,$Perfil,$Estadousu)
+public function adddocente($Nombredoc,$Apellidodoc,$Dococumentodoc,$Correodoc,$Materiadoc,$Usuariodoc,$Passworddoc,$Perfil,$Estadousu)
 {
    //verificar de que no exista un usuario en la bd 
-   $sql1 = "SELECT * FROM usuarios WHERE Usuario = '$Usuariousu'";
+   $sql1 = "SELECT * FROM docentes WHERE Usuariodoc = '$Usuariodoc'";
     $Resultado=$this->db->query($sql1);
    if ($Resultado->rowCount() > 0) {
            
         
       echo "<script>
-          alert('El usuario ya esta registrado');
+          alert('El docente ya esta registrado');
           window.location = '../pages/agregar.php';
       </script>";   
     }else
     {
    //crear la sentencia sql
-   $statement = $this->db->prepare("INSERT INTO usuarios(Nombreusu,Apellidousu,Usuario,Passwordusu,Perfil,Estado)values(:Nombreusu,:Apellidousu,:Usuariousu,:Passwordusu,:Perfil,:Estadousu)");
+   $statement = $this->db->prepare("INSERT INTO docentes(Nombredoc,Apellidodoc,Documentodoc,Correodoc,Materiadoc,Usuariodoc,Passworddoc,Perfil,Estadodoc)values(:Nombredoc,:Apellidodoc,:Dococumentodoc,:Correodoc,:Materiadoc,:Usuariodoc,:Passworddoc,:Perfil,:Estadodoc)");
 
-   $statement->bindParam(':Nombreusu',$Nombreusu);
-   $statement->bindParam(':Apellidousu',$Apellidousu);
-   $statement->bindParam(':Usuariousu',$Usuariousu);
-   $statement->bindParam(':Passwordusu',$Passwordusu);
+   $statement->bindParam(':Nombredoc',$Nombredoc);
+   $statement->bindParam(':Apellidodoc',$Apellidodoc);
+   $statement->bindParam(':Documentodoc',$Documentodoc);
+   $statement->bindParam(':Correodoc', $Correodoc);
+   $statement->bindParam(':Materiadoc',$Materiadoc);
+   $statement->bindParam(':Usuariodoc',$Usuariodoc);
+   $statement->bindParam(':Passworddoc',$Passworddoc);
    $statement->bindParam(':Perfil',$Perfil);
-   $statement->bindParam(':Estadousu',$Estadousu);
+   $statement->bindParam(':Estadodoc',$Estadodoc);
    if($statement->execute())
    {
      

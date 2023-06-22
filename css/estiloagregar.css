@@ -6,7 +6,7 @@
 		font-family: 'Roboto', sans-serif;
 	background-image: linear-gradient(to top, #7028e4 0%, #e5b2ca 100%);
 	}
-	.demo-container {
+	.container {
 		height: 100%;
 		display: flex;
 		justify-content: center;
@@ -50,9 +50,4 @@
     align-items: center;
     justify-content: center;
 	}
-	.container {
-		height: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
+	

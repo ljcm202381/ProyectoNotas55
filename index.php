@@ -34,7 +34,7 @@
             <button class="btn btn-primary btn-lg w-100 shadow-lg">Iniciar sesión</button>
           </form>
          <div class="text-center pt-4">
-          <p class="m-0">No tiene cuenta? <a href="" class="text-dark font-weight-bold">Inscribirse</a></p>
+          <p class="m-0">No tiene cuenta? <a href="Administrador/pages/agregar.php" class="text-dark font-weight-bold">Inscribirse</a></p>
         </div>          
         </div>        
       </div>

@@ -3,7 +3,8 @@
 class Conexion
 {
 
-  protected $db;
+
+  public $db;
   private $drive= "mysql";
   private $host = "localhost";
   private $dbname = "notas2023";
@@ -20,13 +21,13 @@ class Conexion
 
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-     //return $db;
+     return $db;
 
      echo "conexion realizada";
 
    }catch(PDOException $e){
 
-   	echo "se tiene problemas para conectar ".$e->getMessage();
+    echo "se tiene problemas para conectar ".$e->getMessage();
 
    }
 
@@ -38,4 +39,3 @@ class Conexion
 
 
 ?>
-
