@@ -32,72 +32,60 @@
        <a href="cerrar_sesion.php"><button class="btn btn-danger col col align-self-end"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cerrar Sesion</button></a>
             
     </li>
-  
-        
-  
+    
      </ul>
 </nav>
- 
-        <br>
-      
-        <div class="container">
- <h1 style="color:blue;text-align:center;">LISTADO DE USUARIOS</h1>
+      <br>
+      <div class="container"> 
           
-  <div class="content" style="text-align:center;">
-   <div class="justify-content-center">
-    <div class="col-auto mt-5">
-  <table class="table table-dark table-hover">
-      <tr>
+<h1 style="color:blue;text-align: center;">LISTADO DE USUARIOS</h1>
+
+   <div col="col-auto-mt-5">
        
-       <th width="20%">id usuario</th>  
-       <th width="20%">Nombre</th>  
-       <th width="20%">Apellido</th>  
-       <th width="20%">Usuario</th>
-       <th width="20%">Perfil</th>
-       <th width="20%">Estado</th>      
-       <th width="10%">Editar</th>  
-       <th width="10%">Eliminar</th>  
+   <table class="table table-dark table-hover">
+      <tr>
+          
+     <th>ID USUARIO</th>
+     <th>NOMBRE</th>
+     <th>APELLIDO</th>
+     <th>USUARIO</th>
+     <th>PERFIL</th>
+     <th>ESTADO</th>
+     <th>ACTUALIZAR</th>
+     <th>ELIMINAR</th>
+
+  </tr> 
+
+  <tbody>
+      <?php 
+      require_once('../../Conexion.php');
+      require_once('../modelos/administrador.php');
+
+        //crear el objeto para acceder a las funciones de la clase administrador
+      $obj = new Administrador();
+      $datos = $obj->getadmin();
+
       
+       foreach($datos as $datos){
+        ?>
+      <tr>
+          <td><?php echo $datos['id_usuario']?></td>
+          <td><?php echo $datos['Nombreusu']?></td>
+          <td><?php echo $datos['Apellidousu']?></td>
+          <td><?php echo $datos['Usuario']?></td>
+          <td><?php echo $datos['Perfil']?></td>
+          <td><?php echo $datos['Estado']?></td>
+            <td> <a href="editarusuario.php?Id=<?php echo $datos['id_usuario']?>" class="btn btn-success">Actualizar</a>
+          <td><a href="../controladores/eliminarusuario.php?Id=<?php echo $datos['id_usuario']?>" class="btn btn-success">Eliminar</a>
       </tr>
-            <tbody>
 
+<?php } ?>
+  </tbody>
+   </table>
+   </div>
 
-  <?php
- require_once('../../Conexion.php');
-require_once('../modelos/administrador.php');
-  $obj = new Administrador();
-  //$datos = $obj->buscarconsultorio($bus);
-  $datos = $obj->getadmin();
-
-
-  foreach ($datos as $key){
-      
-                ?>
-                
-                    <tr>
-                        <td><?php echo $key["id_usuario"] ?></td>
-                        <td><?php echo $key["Nombreusu"] ?></td>
-                        <td><?php echo $key["Apellidousu"] ?></td>
-                        <td><?php echo $key["Usuario"] ?></td>
-                        <td><?php echo $key["Perfil"] ?></td>
-                        <td><?php echo $key["Estado"] ?></td>
-                       <td> <a href="FeditarDatospacientes.php?id=?" class="btn btn-success">Actualizar</a>
-
-                       </td>
-                        
-                        <td>
-                         <td> <a href="FeditarDatospacientes.php?id=?" class="btn btn-success">Eliminar</a>
-
-                        </td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-    
-        </div>
-        </div>
-        </div>
-
+      </div>
+        
        
     </body>
 </html>

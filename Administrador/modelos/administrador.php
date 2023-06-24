@@ -72,26 +72,28 @@ public function getadmin()
 //funcion para consultar el usuario de acuerdo a su id
 public function getidad($Id)
 {
-  $row=null;
-  $statement=$this->db->prepare("SELECT * FROM usuarios WHERE id_usaurio=:Id AND Perfil='Administrador'");
-  $statement->bindParam(':Id',$Id);
-  $statement->execute();
-  while($result->$statement->fetch()){
-   $row[]=$result;
-  }
-
+   $statement = $this->db->prepare("SELECT * FROM usuarios WHERE id_usuario = :Id");
+            $statement->bindParam(':Id', $Id);
+            $statement->execute();
+            
+            // Obtener los resultados utilizando fetch()
+            $resultado = $statement->fetch(PDO::FETCH_ASSOC);
+            
+            // Devolver los resultados
+            return $resultado;
 
 }
 
 //funcion actualizar los datos del usuario
-public function updatead($Id,$Nombreusu,$Apellidousu,$Usuariousu,$Passwordusu,$Estadousu)
+public function updatead($Id,$Nombreusu,$Apellidousu,$Usuariousu,$Passwordusu,$Perfil,$Estadousu)
 {
-   $statement=$this->bd->prepare("UPDATE usuarios SET Nombreusu=:Nombreusu, Apellidousu=:Apellidousu, Usuario=:Usuariousu, Password=:Passwordusu, Estado=:Estadousu WHERE id_usaurio=$Id");
+   $statement=$this->db->prepare("UPDATE usuarios SET id_usuario=:Id,Nombreusu=:Nombreusu, Apellidousu=:Apellidousu, Usuario=:Usuariousu, Passwordusu=:Passwordusu,Perfil:=Perfil,Estadousu=:Estadousu WHERE id_usaurio=$Id");
    $statement->bindParam(':Id',$Id);
    $statement->bindParam(':Nombreusu',$Nombreusu);
    $statement->bindParam(':Apellidousu',$Apellidousu);
    $statement->bindParam(':Usuariousu',$Usuariousu);
    $statement->bindParam(':Passwordusu',$Passwordusu);
+   $statement->bindParam(':Perfil',$Perfil);
    $statement->bindParam(':Estadousu',$Estadousu);
    if($statement->execute())
    {
@@ -103,13 +105,26 @@ public function updatead($Id,$Nombreusu,$Apellidousu,$Usuariousu,$Passwordusu,$E
 
 }
 //funcion para eliminar un usuario
-public function deletead($Id)
-{
+public function deletead($Id){
+$statement=$this->db->prepare("DELETE FROM usuarios WHERE id_usuario=:Id");
+   $statement->bindParam(':Id',$Id);
+   if($statement->execute()){
+       echo "<script>
+          alert('usuario eliminado');
+          window.location = '../pages/index.php';
+      </script>";  
+
+         
+      }else
+      {
+             echo "<script>
+          alert('usuario no puede ser eliminado');
+          window.location = '../pages/index.php';
+      </script>";  
+
+      }
 
 }
-
-
 }
-
 
 ?>
